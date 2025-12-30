@@ -1,6 +1,8 @@
 @extends('layout.layout')
 @section('konten')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 <style>
     /* --- CSS Hero/Banner --- */
     .hero-container {
@@ -63,18 +65,18 @@
 
     /* Bingkai Foto */
     .team-photo-frame {
-        width: 180px; /* Lebar tetap sesuai gambar */
-        height: 240px; /* Tinggi tetap sesuai gambar */
-        background-color: #d9d9d9; /* Warna jika gambar gagal load */
+        width: 180px;
+        height: 240px;
+        background-color: #d9d9d9;
         margin: 0 auto 15px auto;
-        overflow: hidden; /* Agar gambar tidak keluar bingkai */
+        overflow: hidden;
         border-radius: 4px;
     }
 
     .team-photo-frame img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Penting: agar foto tidak gepeng */
+        object-fit: cover;
         object-position: center;
     }
 
@@ -88,6 +90,20 @@
     .member-role {
         font-size: 0.85rem;
         color: #555;
+        margin-bottom: 5px;
+    }
+
+    /* Style Ikon Instagram */
+    .social-link {
+        color: #ac2bac; /* Warna khas Instagram */
+        font-size: 1.2rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-link:hover {
+        color: #d6249f;
+        transform: scale(1.2);
     }
 
     .member-card {
@@ -110,7 +126,7 @@
 
 <div class="container team-section">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <p class="team-description">
             Kami adalah tim yang terdiri dari individu dengan latar belakang dan keahlian yang beragam, disatukan oleh visi yang sama untuk menciptakan solusi digital yang bermanfaat dan mudah digunakan. Setiap anggota tim berkontribusi sesuai dengan perannya masing-masing, mulai dari perencanaan, pengembangan, hingga pengelolaan sistem.
 
@@ -126,6 +142,10 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
             </div>
             <p class="member-name">Muhammad Anshori Hannan</p>
             <p class="member-role">Master Of BackEnd</p>
+            <a href="https://instagram.com/aanhannan._" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span class="instagram-username">@aanhannan._</span> 
+            </a>
         </div>
 
         <div class="col-md-4 col-6 member-card">
@@ -134,6 +154,10 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
             </div>
             <p class="member-name">Muhammad Abin</p>
             <p class="member-role">Master Of BackEnd</p>
+            <a href="https://instagram.com/mhbin_" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span class="instagram-username">@mhbin_</span> 
+            </a>
         </div>
 
         <div class="col-md-4 col-6 member-card">
@@ -142,6 +166,10 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
             </div>
             <p class="member-name">Fitri Ramdhani</p>
             <p class="member-role">Master Of BackEnd</p>
+            <a href="https://instagram.com/ftry021" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span class="instagram-username">@ftry021</span>
+            </a>
         </div>
     </div>
 
@@ -152,6 +180,10 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
             </div>
             <p class="member-name">Khalif Fauzan Firdaus</p>
             <p class="member-role">Master Of FrontEnd</p>
+            <a href="https://instagram.com/kalvin_deus" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span class="instagram-username">@kalvin_deus</span> 
+            </a>
         </div>
 
         <div class="col-md-4 col-6 member-card">
@@ -160,6 +192,10 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
             </div>
             <p class="member-name">Rizky Dewa Cahya Saputra</p>
             <p class="member-role">Junior Of FrontEnd</p>
+            <a href="https://instagram.com/riz_zyxo" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span class="instagram-username">@riz_zyxo</span> 
+            </a>
         </div>
     </div>
 </div>
