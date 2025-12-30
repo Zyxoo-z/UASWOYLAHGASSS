@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
-        /* Agar footer selalu di bawah */
         body {
             display: flex;
             flex-direction: column;
@@ -18,7 +17,7 @@
             flex: 1;
         }
 
-        /* Navbar Styling (Tetap dengan garis kuning) */
+        /* Navbar Styling */
         .nav-custom-link {
             position: relative;
             padding-bottom: 5px;
@@ -32,12 +31,12 @@
             text-decoration: none;
         }
 
+        /* Logic Active: Garis Kuning Otomatis */
         .nav-custom-link.active {
             color: #000 !important;
             border-bottom: 3px solid #ffc107 !important;
         }
 
-        /* Search Input Styling */
         .search-input-hidden {
             width: 0;
             opacity: 0;
@@ -54,21 +53,20 @@
             border: 1px solid #dee2e6;
         }
 
-        /* Footer Styling (GELAP & TANPA GARIS KUNING) */
         .footer-dark {
-            background-color: #1a1a1a; /* Warna hitam elegan */
+            background-color: #1a1a1a;
             color: #ffffff;
         }
 
         .footer-link-plain {
-            color: #adb5bd !important; /* Warna abu-abu terang */
+            color: #adb5bd !important;
             text-decoration: none;
             font-size: 14px;
             transition: color 0.3s ease;
         }
 
         .footer-link-plain:hover {
-            color: #ffc107 !important; /* Warna kuning hanya saat hover teks */
+            color: #ffc107 !important;
         }
     </style>
 </head>
@@ -76,7 +74,7 @@
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom py-2">
     <div class="container-fluid">
-        <a class="navbar-brand me-0" href="#">
+        <a class="navbar-brand me-0" href="/">
             <img src="{{ asset('images/logo2.png') }}" alt="Logo Pariwisata" style="height: 65px; width: auto; object-fit: contain;">
         </a>
 
@@ -86,9 +84,17 @@
 
         <div class="collapse navbar-collapse" id="navContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link nav-custom-link active" href="#">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link nav-custom-link" href="#">Destinasi</a></li>
-                <li class="nav-item"><a class="nav-link nav-custom-link" href="#">Tentang Kami</a></li>
+                {{-- Menggunakan request()->is() untuk deteksi halaman aktif --}}
+                <li class="nav-item">
+                    <a class="nav-link nav-custom-link {{ request()->is('/') ? 'active' : '' }}" href="/">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-custom-link {{ request()->is('destinasi') ? 'active' : '' }}" href="/destinasi">Destinasi</a>
+                </li>
+                <li class="nav-item">
+    {{-- 'about' di sini harus sama dengan uri di Route::get('/about', ...) --}}
+    <a class="nav-link nav-custom-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang Kami</a>
+</li>
             </ul>
 
             <div class="d-flex align-items-center position-relative">
@@ -110,8 +116,8 @@
 <footer class="footer-dark py-4 mt-auto">
     <div class="container-fluid">
         <ul class="nav justify-content-center border-bottom border-secondary pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-3 footer-link-plain">Beranda</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-3 footer-link-plain">Destinasi</a></li>
+            <li class="nav-item"><a href="/" class="nav-link px-3 footer-link-plain">Beranda</a></li>
+            <li class="nav-item"><a href="/destination" class="nav-link px-3 footer-link-plain">Destinasi</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 footer-link-plain">Tentang Kami</a></li>
         </ul>
         <p class="text-center text-secondary mb-0">© 2025 NusaTrip, Inc. All rights reserved.</p>
@@ -120,18 +126,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logika Garis Kuning Hanya untuk Navbar
-        const navLinks = document.querySelectorAll('.nav-custom-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Logika Search
+        // Logika Search tetap digunakan
         const searchBtn = document.getElementById('btn-search-toggle');
         const searchInput = document.getElementById('input-search-expand');
+        
         searchBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             searchInput.classList.toggle('show');
