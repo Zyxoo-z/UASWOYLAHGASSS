@@ -117,8 +117,8 @@
     <div class="container-fluid">
         <ul class="nav justify-content-center border-bottom border-secondary pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-3 footer-link-plain">Beranda</a></li>
-            <li class="nav-item"><a href="/destination" class="nav-link px-3 footer-link-plain">Destinasi</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-3 footer-link-plain">Tentang Kami</a></li>
+            <li class="nav-item"><a href="/destinasi" class="nav-link px-3 footer-link-plain">Destinasi</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link px-3 footer-link-plain">Tentang Kami</a></li>
         </ul>
         <p class="text-center text-secondary mb-0">© 2025 NusaTrip, Inc. All rights reserved.</p>
     </div>
