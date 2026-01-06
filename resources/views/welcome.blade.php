@@ -53,7 +53,28 @@
             opacity: 1;
             transform: translateY(0);
         }
-    }
+    } 
+
+    
+
+    /* ===== KATEGORI ===== */
+.kategori-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.kategori-item:hover .kategori-img {
+    transform: scale(1.08);
+}
+
+.kategori-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
 </style>
 
 <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
@@ -100,4 +121,46 @@
     </button>
 </div>
 
+</div> <!-- penutup carousel -->
+
+<!-- ===== KATEGORI ===== -->
+<section class="py-5">
+    <div class="container text-center">
+
+        <h5 class="fw-semibold mb-4">Kategori</h5>
+
+        <div class="row justify-content-center g-4">
+
+            <div class="col-6 col-md-3 kategori-item">
+                <img src="{{ asset('images/3.jpg') }}"
+                     class="rounded-circle kategori-img shadow-sm"
+                     alt="Gunung">
+                <p class="kategori-title">Gunung</p>
+            </div>
+
+            <div class="col-6 col-md-3 kategori-item">
+                <img src="{{ asset('images/4.jpg') }}"
+                     class="rounded-circle kategori-img shadow-sm"
+                     alt="Pantai">
+                <p class="kategori-title">Pantai</p>
+            </div>
+
+            <div class="col-6 col-md-3 kategori-item">
+                <img src="{{ asset('images/gili.jpg') }}"
+                     class="rounded-circle kategori-img shadow-sm"
+                     alt="Air Terjun">
+                <p class="kategori-title">Air Terjun</p>
+            </div>
+
+            <div class="col-6 col-md-3 kategori-item">
+                <img src="{{ asset('images/idealis.jpg') }}"
+                     class="rounded-circle kategori-img shadow-sm"
+                     alt="Tempat Adat">
+                <p class="kategori-title">Tempat Adat</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ===== END KATEGORI ===== -->
 @endsection
