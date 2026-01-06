@@ -150,7 +150,7 @@ Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya m
 
         <div class="col-md-4 col-6 member-card">
             <div class="team-photo-frame">
-                <img src="{{ asset('images/thanos.jpg') }}" alt="Muhammad Abin">
+                <img src="{{ asset('images/idealis.jpg') }}" alt="Muhammad Abin">
             </div>
             <p class="member-name">Muhammad Abin</p>
             <p class="member-role">Master Of BackEnd</p>
