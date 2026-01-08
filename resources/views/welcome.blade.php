@@ -164,3 +164,5 @@
 </section>
 <!-- ===== END KATEGORI ===== -->
 @endsection
+
+<a href="posts">test</a>
