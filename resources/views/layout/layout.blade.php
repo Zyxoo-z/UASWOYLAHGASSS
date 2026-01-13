@@ -148,12 +148,16 @@
                                 <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
-                                <li>
-                                    <a class="dropdown-item py-2" href="{{ route('admin.index') }}">
-                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard Admin
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
+                                
+                                @if(Auth::user()->role == 'admin')
+                                    <li>
+                                        <a class="dropdown-item py-2" href="{{ route('admin.index') }}">
+                                            <i class="bi bi-speedometer2 me-2"></i> Dashboard Admin
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
+
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -165,9 +169,12 @@
                             </ul>
                         </li>
                     @else
-                        <li class="nav-item">
-                            <a href="{{ route('login') }}" class="btn btn-sm btn-outline-dark rounded-pill px-3" title="Login Admin">
-                                <i class="bi bi-lock-fill"></i> Login
+                        <li class="nav-item d-flex gap-2">
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                                Login
+                            </a>
+                            <a href="{{ route('register') }}" class="btn btn-sm btn-dark rounded-pill px-3">
+                                Daftar
                             </a>
                         </li>
                     @endauth

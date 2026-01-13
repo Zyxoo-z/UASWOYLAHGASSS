@@ -111,4 +111,43 @@ class PariwisataController extends Controller
 
         return view('destinasi_detail', compact('dest'));
     }
+
+    // --- FITUR KOMENTAR (BARU) ---
+    public function postComment(Request $request, $id)
+    {
+        $request->validate(['body' => 'required']);
+
+        \App\Models\Comment::create([
+            'user_id' => auth()->id(),
+            'destination_id' => $id,
+            'body' => $request->body
+        ]);
+
+        return back()->with('success', 'Komentar berhasil dikirim!');
+    }
+
+    // --- FITUR LIKE (BARU) ---
+    public function toggleLike($id)
+    {
+        $destination = Destination::findOrFail($id);
+        $user_id = auth()->id();
+
+        // Cek apakah user sudah like?
+        $existingLike = \App\Models\Like::where('user_id', $user_id)
+                                      ->where('destination_id', $id)
+                                      ->first();
+
+        if ($existingLike) {
+            $existingLike->delete(); // Kalau sudah, berarti UNLIKE
+            $msg = 'Anda batal menyukai destinasi ini.';
+        } else {
+            \App\Models\Like::create([ // Kalau belum, berarti LIKE
+                'user_id' => $user_id,
+                'destination_id' => $id
+            ]);
+            $msg = 'Anda menyukai destinasi ini!';
+        }
+
+        return back()->with('success', $msg);
+    }
 }
