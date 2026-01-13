@@ -96,7 +96,7 @@
         }
 
         .admin-gate {
-            cursor: default;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -104,7 +104,7 @@
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom py-2 sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand me-0 admin-gate" href="{{ route('admin.index') }}" title="Manage Site">
+        <a class="navbar-brand me-0 admin-gate" href="/" title="NusaTrip Home">
             <img src="{{ asset('images/logo2.png') }}" alt="Logo" style="height: 60px; width: auto; object-fit: contain;">
         </a>
 
@@ -125,20 +125,55 @@
                 </li>
             </ul>
 
-            <div class="d-flex align-items-center position-relative px-3">
-                <form action="{{ route('destinasi.index') }}" method="GET" id="search-form" class="d-flex align-items-center">
-                    <input type="text" name="search" id="input-search-expand" 
-                           class="form-control form-control-sm search-input-hidden" 
-                           placeholder="Cari destinasi..." 
-                           value="{{ request('search') }}">
-                    
-                    <button type="button" id="btn-search-toggle" class="btn border-0 p-0 ms-2 text-dark">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg>
-                    </button>
-                </form>
+            <div class="d-flex align-items-center">
+                <div class="position-relative px-2">
+                    <form action="{{ route('destinasi.index') }}" method="GET" id="search-form" class="d-flex align-items-center">
+                        <input type="text" name="search" id="input-search-expand" 
+                               class="form-control form-control-sm search-input-hidden" 
+                               placeholder="Cari destinasi..." 
+                               value="{{ request('search') }}">
+                        
+                        <button type="button" id="btn-search-toggle" class="btn border-0 p-0 ms-2 text-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="navbar-nav ms-3">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-bold text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
+                                <li>
+                                    <a class="dropdown-item py-2" href="{{ route('admin.index') }}">
+                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard Admin
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger py-2">
+                                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-outline-dark rounded-pill px-3" title="Login Admin">
+                                <i class="bi bi-lock-fill"></i> Login
+                            </a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
+
         </div>
     </div>
 </nav>
@@ -146,7 +181,7 @@
 <main>
     @if(session('success'))
         <div class="container mt-3">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
