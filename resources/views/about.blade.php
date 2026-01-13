@@ -127,7 +127,7 @@
 <div class="container team-section">
     <div class="row">
         <div class="col-12 text-center">
-            <p class="team-description">
+            <p class="lead quote-text">
             Kami adalah tim yang terdiri dari individu dengan latar belakang dan keahlian yang beragam, disatukan oleh visi yang sama untuk menciptakan solusi digital yang bermanfaat dan mudah digunakan. Setiap anggota tim berkontribusi sesuai dengan perannya masing-masing, mulai dari perencanaan, pengembangan, hingga pengelolaan sistem.
 
 Dengan semangat kolaborasi dan komitmen terhadap kualitas, kami terus berupaya mengembangkan produk yang tidak hanya fungsional, tetapi juga memberikan pengalaman terbaik bagi pengguna. Kami percaya bahwa kerja sama tim, inovasi, dan tanggung jawab adalah kunci dalam menghadirkan layanan yang dapat dipercaya.

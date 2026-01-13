@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NusaTrip</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            /* Animasi halus saat seluruh halaman dimuat */
             animation: fadeInPage 0.6s ease-in-out;
         }
         
@@ -35,7 +35,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Garis bawah menggunakan pseudo-element untuk animasi lebih halus */
         .nav-custom-link::after {
             content: '';
             position: absolute;
@@ -47,19 +46,11 @@
             transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Hover effect */
-        .nav-custom-link:hover::after {
-            width: 100%;
-        }
+        .nav-custom-link:hover::after { width: 100%; }
 
-        /* Animasi khusus untuk Link yang sedang AKTIF */
-        .nav-custom-link.active {
-            color: #000 !important;
-        }
-
+        .nav-custom-link.active { color: #000 !important; }
         .nav-custom-link.active::after {
             width: 100%;
-            /* Efek 'slide in' saat halaman baru terbuka */
             animation: slideInLine 0.6s ease-out;
         }
 
@@ -68,7 +59,7 @@
             to { width: 100%; }
         }
 
-        /* Search Input Styling */
+        /* Search Input */
         .search-input-hidden {
             width: 0;
             opacity: 0;
@@ -86,7 +77,7 @@
             border-radius: 20px;
         }
 
-        /* Footer Styling */
+        /* Footer */
         .footer-dark {
             background-color: #1a1a1a;
             color: #ffffff;
@@ -101,7 +92,11 @@
 
         .footer-link-plain:hover {
             color: #ffc107 !important;
-            padding-left: 5px; /* Efek gerak sedikit saat hover */
+            padding-left: 5px;
+        }
+
+        .admin-gate {
+            cursor: default;
         }
     </style>
 </head>
@@ -109,7 +104,7 @@
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom py-2 sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand me-0" href="/">
+        <a class="navbar-brand me-0 admin-gate" href="{{ route('admin.index') }}" title="Manage Site">
             <img src="{{ asset('images/logo2.png') }}" alt="Logo" style="height: 60px; width: auto; object-fit: contain;">
         </a>
 
@@ -131,51 +126,91 @@
             </ul>
 
             <div class="d-flex align-items-center position-relative px-3">
-                <input type="text" id="input-search-expand" class="form-control form-control-sm search-input-hidden" placeholder="Cari destinasi...">
-                <button id="btn-search-toggle" class="btn border-0 p-0 ms-2 text-dark">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </button>
+                <form action="{{ route('destinasi.index') }}" method="GET" id="search-form" class="d-flex align-items-center">
+                    <input type="text" name="search" id="input-search-expand" 
+                           class="form-control form-control-sm search-input-hidden" 
+                           placeholder="Cari destinasi..." 
+                           value="{{ request('search') }}">
+                    
+                    <button type="button" id="btn-search-toggle" class="btn border-0 p-0 ms-2 text-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </nav>
 
 <main>
+    @if(session('success'))
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     @yield('konten')
 </main>
 
 <footer class="footer-dark py-4 mt-auto">
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
         <ul class="nav justify-content-center border-bottom border-secondary pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-3 footer-link-plain">Beranda</a></li>
             <li class="nav-item"><a href="/destinasi" class="nav-link px-3 footer-link-plain">Destinasi</a></li>
             <li class="nav-item"><a href="/about" class="nav-link px-3 footer-link-plain">Tentang Kami</a></li>
         </ul>
-        <p class="text-center text-secondary mb-0">© 2025 NusaTrip, Inc. All rights reserved.</p>
+        <p class="text-secondary mb-0">© 2026 NusaTrip, Inc. All rights reserved.</p>
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchBtn = document.getElementById('btn-search-toggle');
         const searchInput = document.getElementById('input-search-expand');
+        const searchForm = document.getElementById('search-form');
         
-        searchBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            searchInput.classList.toggle('show');
-            if (searchInput.classList.contains('show')) searchInput.focus();
-        });
+        if(searchBtn) {
+            searchBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Jika input tidak terlihat, tampilkan
+                if (!searchInput.classList.contains('show')) {
+                    searchInput.classList.add('show');
+                    searchInput.focus();
+                } else {
+                    // Jika input terlihat dan ada isinya, submit form
+                    if (searchInput.value.trim() !== "") {
+                        searchForm.submit();
+                    } else {
+                        // Jika kosong, sembunyikan kembali
+                        searchInput.classList.remove('show');
+                    }
+                }
+            });
+        }
 
+        // Menutup input jika klik di luar area navbar
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.navbar')) {
-                searchInput.classList.remove('show');
+                // Jangan sembunyikan jika sedang ada teks hasil pencarian
+                if (searchInput.value.trim() === "") {
+                    searchInput.classList.remove('show');
+                }
             }
         });
+
+        // Tetap tampilkan input jika sedang dalam mode pencarian (ada parameter URL)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('search')) {
+            searchInput.classList.add('show');
+        }
     });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>     
+</html>

@@ -3,164 +3,196 @@
 @section('konten')
 
 <style>
-    /* 1. Mengatur dimensi dan redup gambar */
+    /* ===== HERO CAROUSEL ===== */
     .carousel-item {
-        height: 700px; 
-        min-height: 300px;
+        height: 600px; 
         background: #000;
         overflow: hidden;
     }
-
     .hero-img {
         height: 100%;
         object-fit: cover;
-        filter: brightness(60%); /* Efek redup */
-        /* Efek Zoom Halus saat slide aktif */
+        filter: brightness(60%);
         transition: transform 3s ease; 
     }
-
     .carousel-item.active .hero-img {
-        transform: scale(1.1); /* Gambar sedikit membesar saat aktif */
+        transform: scale(1.1);
     }
-
-    /* 2. Animasi Teks Caption */
-    .carousel-caption {
-        bottom: 10%;
-        z-index: 10;
-    }
-
     .carousel-caption h5 {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 700;
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-        /* Animasi Muncul dari Bawah */
-        animation: fadeInUp 1s both;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     }
-
-    .carousel-caption p {
-        font-size: 1.2rem;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-        /* Animasi Muncul dengan delay agar lebih halus */
-        animation: fadeInUp 1s both 0.3s;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    } 
-
-    
 
     /* ===== KATEGORI ===== */
-.kategori-img {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
+    .kategori-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .kategori-item:hover .kategori-img {
+        transform: scale(1.1);
+    }
+    .kategori-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    .kategori-link:hover {
+        color: #0d6efd;
+    }
 
-.kategori-item:hover .kategori-img {
-    transform: scale(1.08);
-}
-
-.kategori-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-top: 10px;
-}
-
+    /* ===== CARD STYLE ===== */
+    .card-destinasi {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+    .card-destinasi:hover {
+        transform: translateY(-8px);
+    }
+    .card-destinasi img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .text-limit-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+    /* Menghilangkan dekorasi link pada card */
+    .destinasi-anchor {
+        text-decoration: none;
+        color: inherit;
+    }
+    .destinasi-anchor:hover {
+        color: inherit;
+    }
 </style>
 
-<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-    
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></button>
-    </div>
-
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('images/rinjani.jpg') }}" class="d-block w-100 hero-img" alt="Gunung Rinjani">
-            <div class="carousel-caption d-none d-md-block">
+            <img src="{{ asset('images/rinjani.jpg') }}" class="d-block w-100 hero-img" alt="Rinjani">
+            <div class="carousel-caption">
                 <h5>Gunung Rinjani</h5>
                 <p>Jelajahi keindahan atap Pulau Lombok yang memukau.</p>
             </div>
         </div>
-
         <div class="carousel-item">
-            <img src="{{ asset('images/bukit-merese.jpg') }}" class="d-block w-100 hero-img" alt="Bukit Merese">
-            <div class="carousel-caption d-none d-md-block">
+            <img src="{{ asset('images/bukit-merese.jpg') }}" class="d-block w-100 hero-img" alt="Merese">
+            <div class="carousel-caption">
                 <h5>Bukit Merese</h5>
                 <p>Menikmati hamparan laut biru dari ketinggian bukit.</p>
             </div>
         </div>
-
         <div class="carousel-item">
-            <img src="{{ asset('images/gili.jpg') }}" class="d-block w-100 hero-img" alt="Gili Trawangan">
-            <div class="carousel-caption d-none d-md-block">
+            <img src="{{ asset('images/gili.jpg') }}" class="d-block w-100 hero-img" alt="Gili">
+            <div class="carousel-caption">
                 <h5>Gili Trawangan</h5>
                 <p>Ketenangan pulau tanpa kendaraan bermotor.</p>
             </div>
         </div>
     </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
 
-</div> <!-- penutup carousel -->
-
-<!-- ===== KATEGORI ===== -->
 <section class="py-5">
     <div class="container text-center">
-
-        <h5 class="fw-semibold mb-4">Kategori</h5>
-
+        <h5 class="section-title">Kategori</h5>
         <div class="row justify-content-center g-4">
-
-            <div class="col-6 col-md-3 kategori-item">
-                <img src="{{ asset('images/3.jpg') }}"
-                     class="rounded-circle kategori-img shadow-sm"
-                     alt="Gunung">
-                <p class="kategori-title">Gunung</p>
-            </div>
-
-            <div class="col-6 col-md-3 kategori-item">
-                <img src="{{ asset('images/4.jpg') }}"
-                     class="rounded-circle kategori-img shadow-sm"
-                     alt="Pantai">
-                <p class="kategori-title">Pantai</p>
-            </div>
-
-            <div class="col-6 col-md-3 kategori-item">
-                <img src="{{ asset('images/gili.jpg') }}"
-                     class="rounded-circle kategori-img shadow-sm"
-                     alt="Air Terjun">
-                <p class="kategori-title">Air Terjun</p>
-            </div>
-
-            <div class="col-6 col-md-3 kategori-item">
-                <img src="{{ asset('images/idealis.jpg') }}"
-                     class="rounded-circle kategori-img shadow-sm"
-                     alt="Tempat Adat">
-                <p class="kategori-title">Tempat Adat</p>
-            </div>
-
+            @foreach($categories as $cat)
+                <div class="col-6 col-md-2 kategori-item">
+                    <a href="{{ url('/kategori/'.$cat->id) }}" class="kategori-link">
+                        <img src="{{ asset($cat->gambar_kategori) }}" class="rounded-circle kategori-img shadow-sm border" alt="{{ $cat->nama_kategori }}">
+                        <p class="kategori-title mt-2 fw-medium">{{ $cat->nama_kategori }}</p>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
-<!-- ===== END KATEGORI ===== -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <h5 class="section-title">Paling Populer</h5>
+        <div class="row g-4">
+            @foreach($destinations->take(4) as $dest)
+            <div class="col-6 col-md-3">
+                <a href="{{ url('/destinasi/'.$dest->id) }}" class="destinasi-anchor">
+                    <div class="card card-destinasi border-0 bg-transparent">
+                        <img src="{{ asset($dest->gambar) }}" class="card-img-top shadow-sm mb-3" alt="{{ $dest->nama_destinasi }}">
+                        <div class="card-body p-0">
+                            <h6 class="fw-bold mb-1 text-dark">{{ $dest->nama_destinasi }}</h6>
+                            <p class="text-muted text-limit-2">
+                                {{ $dest->deskripsi_singkat }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <h5 class="section-title">Jelajah</h5>
+        <div class="row g-4">
+            @foreach($destinations->skip(4)->take(4) as $dest)
+            <div class="col-6 col-md-3">
+                <a href="{{ url('/destinasi/'.$dest->id) }}" class="destinasi-anchor">
+                    <div class="card card-destinasi border-0">
+                        <img src="{{ asset($dest->gambar) }}" class="card-img-top shadow-sm mb-3" alt="{{ $dest->nama_destinasi }}">
+                        <div class="card-body p-0">
+                            <h6 class="fw-bold mb-1 text-dark">{{ $dest->nama_destinasi }}</h6>
+                            <p class="text-muted text-limit-2">
+                                {{ $dest->deskripsi_singkat }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white border-top">
+    <div class="container">
+        <h5 class="section-title text-center mb-5">Update Terbaru</h5>
+        @forelse($destinations->take(2) as $index => $dest)
+        <div class="row align-items-center mb-5 {{ $index % 2 != 0 ? 'flex-row-reverse' : '' }}">
+            <div class="col-md-6">
+                <a href="{{ url('/destinasi/'.$dest->id) }}">
+                    <img src="{{ asset($dest->gambar) }}" class="img-fluid shadow rounded" style="height: 350px; width: 100%; object-fit: cover;">
+                </a>
+            </div>
+            <div class="col-md-6 p-md-5">
+                <h2 class="fw-bold">{{ $dest->nama_destinasi }}</h2>
+                <p class="text-muted" style="text-align: justify;">{{ $dest->deskripsi_singkat }}</p>
+                <a href="{{ url('/destinasi/'.$dest->id) }}" class="btn btn-dark px-4 py-2">Detail Selengkapnya</a>
+            </div>
+        </div>
+        @empty
+            <p class="text-center text-muted">Belum ada data inputan baru.</p>
+        @endforelse
+    </div>
+</section>
+
 @endsection
